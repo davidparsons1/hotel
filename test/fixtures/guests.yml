@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  guest_first_name: MyString
+  guest_last_name: MyString
+  guest_email: MyString
+  guest_phone: MyString
+  guest_address: MyString
+  password_digest: MyString
+
+two:
+  guest_first_name: MyString
+  guest_last_name: MyString
+  guest_email: MyString
+  guest_phone: MyString
+  guest_address: MyString
+  password_digest: MyString

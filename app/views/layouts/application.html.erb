@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>HotelApp</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<div id="banner">
+
+<%= "PARSONS HOTEL GROUP" %>
+
+<div id="nav">
+	  <li><%= link_to "Hotels", 'http://localhost:3000/hotels'%></li>
+	  <li><%= link_to "Rooms", 'http://localhost:3000/rooms'%></li>
+	  <li><%= link_to "Guests", 'http://localhost:3000/guests'%></li>
+	 </div>
+</div>
+
+<%= yield %>
+
+<div class = "img">
+<%= image_tag("hotel.jpg", :size => "300x100") %>
+<%= image_tag("hotel01.jpg", :size => "300x100") %>
+<%= image_tag("hotel02.jpg", :size => "300x100") %>
+<%= image_tag("hotel04.jpg", :size => "300x100") %>
+</div>
+
+<div id="banner">
+<%= "ENJOY YOUR STAY" %>
+</div>
+</body>
+</html>

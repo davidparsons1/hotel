@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  room_type_id: 1
+  floor: MyString
+  streetview: false
+
+two:
+  room_type_id: 1
+  floor: MyString
+  streetview: false

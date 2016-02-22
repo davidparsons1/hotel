@@ -66,6 +66,16 @@ class HotelsController < ApplicationController
     def set_hotel
       @hotel = Hotel.find(params[:id])
     end
+	
+	 def create
+    @hotel = Hotel.new(user_params)
+    if @hotel.save
+      flash[:success] = "The Hotel has been added!"
+      redirect_to @user
+    else
+      render 'new'
+    end
+  end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def hotel_params

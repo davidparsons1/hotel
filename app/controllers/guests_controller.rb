@@ -1,6 +1,14 @@
 class GuestsController < ApplicationController
   before_action :set_guest, only: [:show, :edit, :update, :destroy]
-
+  before_filter :require_login
+  
+	def require_login
+		unless current_guest
+		redirect_to login_path
+		flash[:notice] = "Please log in to view this page"
+		
+		end
+	end
   # GET /guests
   # GET /guests.json
   def index
@@ -30,6 +38,7 @@ class GuestsController < ApplicationController
       if @guest.save
         format.html { redirect_to @guest, notice: 'Guest was successfully created.' }
         format.json { render :show, status: :created, location: @guest }
+		Mailer.welcome(@guest).deliver_now
       else
         format.html { render :new }
         format.json { render json: @guest.errors, status: :unprocessable_entity }
@@ -69,6 +78,6 @@ class GuestsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def guest_params
-      params.require(:guest).permit(:guest_first_name, :guest_last_name, :guest_email, :guest_phone, :guest_address, :password_digest)
+      params.require(:guest).permit(:guest_first_name, :guest_last_name, :guest_email, :guest_phone, :guest_address, :password, :password_confirmation)
     end
 end

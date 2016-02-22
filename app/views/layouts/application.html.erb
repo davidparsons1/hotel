@@ -1,35 +1,45 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>HotelApp</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+   
+    <%= stylesheet_link_tag 'application', media: 'all',
+                                           'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+    
+  </head>
+  <body>
+    <header class="navbar navbar-fixed-top navbar-inverse">
+      <div class="container">
+	   <% flash.each do |key, value| %>
+			<div class="flash<%key%>">
+				<%= value%>
+			</div>
+	    <%end%>
+	   <%= link_to "The Parsons Group", root_path, id: "logo" %>
+        <nav>
+          <ul class="nav navbar-nav navbar-right" >
+            <li><%= link_to "Home",   root_path %></li>
+            <li><%= link_to "Hotel",   hotels_path %></li>
+			<li><%= link_to "Guests",  guests_path %></li>
+			<li><%= link_to "Room",   rooms_path %></li>
+		 
+		   <% if !logged_in? %>
+		   <li><%= link_to "Log in", login_path %></li>
+		   <%else%>
+		   <li> <%= link_to "Log out", logout_path %></li>
+		   <% end %>
+		   </ul>
+		   </header>
+		   
+        </nav>
+		
+		
 
-<div id="banner">
+      <%= yield %>
+	  
+    David Parsons - davidparsons1
 
-<%= "PARSONS HOTEL GROUP" %>
-
-<div id="nav">
-	  <li><%= link_to "Hotels", 'http://localhost:3000/hotels'%></li>
-	  <li><%= link_to "Rooms", 'http://localhost:3000/rooms'%></li>
-	  <li><%= link_to "Guests", 'http://localhost:3000/guests'%></li>
-	 </div>
-</div>
-
-<%= yield %>
-
-<div class = "img">
-<%= image_tag("hotel.jpg", :size => "300x100") %>
-<%= image_tag("hotel01.jpg", :size => "300x100") %>
-<%= image_tag("hotel02.jpg", :size => "300x100") %>
-<%= image_tag("hotel04.jpg", :size => "300x100") %>
-</div>
-
-<div id="banner">
-<%= "ENJOY YOUR STAY" %>
-</div>
-</body>
+  </body>
+  
 </html>

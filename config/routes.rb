@@ -1,16 +1,22 @@
 Rails.application.routes.draw do
   
 
+ 
+   get 'pages/home' 
+   get 'signup' => 'guests#new'
+   
   resources :rooms
   resources :guests
   resources :room_types
   resources :reservations
   resources :hotels
-  
-   get 'pages/home'
-   get 'pages/hotel'
-   get 'pages/room'
-   get 'pages/guest'
+   
+  controller :sessions do
+	get 'login' => :new
+	post 'login' => :create
+	get 'logout' => :destroy
+	delete 'logout' => :destroy
+  end
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -1,14 +1,11 @@
 class GuestsController < ApplicationController
   before_action :set_guest, only: [:show, :edit, :update, :destroy]
-  before_filter :require_login
   
-	def require_login
-		unless current_guest
-		redirect_to login_path
-		flash[:notice] = "Please log in to view this page"
+  
+
 		
-		end
-	end
+
+	
   # GET /guests
   # GET /guests.json
   def index

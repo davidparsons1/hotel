@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160219124538) do
+ActiveRecord::Schema.define(version: 20160311171623) do
 
   create_table "comments", force: :cascade do |t|
     t.text     "content"
@@ -38,6 +38,9 @@ ActiveRecord::Schema.define(version: 20160219124538) do
     t.string   "location"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "image"
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
   create_table "reservations", force: :cascade do |t|
@@ -45,6 +48,15 @@ ActiveRecord::Schema.define(version: 20160219124538) do
     t.date     "check_in"
     t.date     "check_out"
     t.integer  "guest_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.text     "content"
+    t.integer  "guest_id"
+    t.integer  "hotel_id"
+    t.integer  "stars"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

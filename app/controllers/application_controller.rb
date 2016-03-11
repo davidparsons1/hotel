@@ -5,9 +5,17 @@ class ApplicationController < ActionController::Base
   include ApplicationHelper
   
 	def authorise
-		unless log_in
+		unless logged_in?
 		store_location
 		redirect_to login_path, :notice => "Please login to view this page"
 		end
 	end
+		
+		private
+		def store_location
+			session[:return_to]=request.fullpath
+	end
+
+	
+
 end

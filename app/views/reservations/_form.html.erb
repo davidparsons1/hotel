@@ -11,22 +11,16 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :room_id %><br>
-    <%= f.number_field :room_id %>
-  </div>
+  
   <div class="field">
     <%= f.label :check_in %><br>
-    <%= f.date_select :check_in ,{:start_year => 2016, :end_year => 2021}%>
+    <%= f.date_field :check_in  %>
   </div>
   <div class="field">
     <%= f.label :check_out %><br>
-    <%= f.date_select :check_out,{:start_year => 2016, :end_year => 2021} %>
+    <%= f.date_field :check_out %>
   </div>
-  <div class="field">
-    <%= f.label :guest_id %><br>
-    <%= f.number_field :guest_id ,value:current_guest:guest_first_name %>
-  </div>
+ 
   <div class="actions">
     <%= f.submit %>
   </div>

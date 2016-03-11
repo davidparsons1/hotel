@@ -9,7 +9,10 @@
   <img src="assets/parsons.jpg" alt="The Parsons Group" height=200px width=200px><br>
   
   
-
+<% if !logged_in? %>
   <%= button_to "Sign up now!", signup_path , class: "btn btn-lg btn-primary", :method => :get %>
   <%=  button_to "Log in!", login_path , class: "btn btn-lg btn-primary", :method => :get %>
+  <%else%>
+  <%= button_to "View Hotels!", hotels_path , class: "btn btn-lg btn-primary", :method => :get %>
+  <%end%>
 </div> 

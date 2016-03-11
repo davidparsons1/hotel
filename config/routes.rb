@@ -2,8 +2,14 @@ Rails.application.routes.draw do
   
 
  
+  resources :reviews
    get 'pages/home' 
    get 'signup' => 'guests#new'
+   
+   resources :hotels do
+resources :reviews
+end
+
    
   resources :rooms
   resources :guests

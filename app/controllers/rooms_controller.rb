@@ -1,6 +1,13 @@
 class RoomsController < ApplicationController
   before_action :set_room, only: [:show, :edit, :update, :destroy]
-
+  before_filter :require_login
+  
+  def require_login
+		unless logged_in?
+		redirect_to login_path
+		flash[:notice] = "Please log in to view this page"
+		end
+	end
   # GET /rooms
   # GET /rooms.json
   def index

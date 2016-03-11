@@ -10,5 +10,53 @@
   <%= @hotel.location %>
 </p>
 
+<th> <%= image_tag"http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@hotel.latitude}%2C#{@hotel.longitude}" %></th>
+
+<h4>These are the rooms we have available</h4>
+<% @hotel.rooms.each do |r| %>
+<table border="1">
+  <thead>
+    <tr>
+	<th><%= image_tag(r.room_type.image, :size=>"250x250") %></th></br>
+	<th><strong>Floor: </strong><%= r.floor %></br>
+	<strong>Breakfast Included: </strong><%= r.room_type.breakfast %></br>
+	<strong>Streetview: </strong><%= r.streetview %></br>
+
+	<%= link_to "Book Room", new_reservation_path(room_id: r) %></th>
+	</tr>
+	</thead>
+	</table>
+<% end %>
+
+<h2>Star Rating and Review:</h2>
+<%= form_for([@hotel, Review.new]) do |r| %>
+
+<h3><%= r.label :stars %>
+ <% stars = [1, 2, 3, 4, 5] %>
+ <% stars.each do |star| %>
+<%= r.radio_button :stars, star %> <%= star %>
+ <% end %>
+</h3></br>
+ <%= r.text_area :content, :rows => 4, :cols => 40 %>
+<div class="actions">
+<%= r.submit "Post a Comment"%>
+</div>
+<% end %>
+
+<% if @hotel.reviews.empty? %>
+<h3>You are the first to review </h3>
+<% else %>
+<h2>What others felt about here:</h2>
+<% @hotel.reviews.reverse.each do |review| %>
+<p><%= review.content %>
+Posted <%= time_ago_in_words(review.created_at) %> ago by
+<%=review.guest.guest_first_name %></p>
+<% end %>
+<h3>Star Rating</h3>
+<p>
+<%= number_with_precision( @hotel.average_stars, precision: 0) %>
+</p>
+<% end%>
+
 <%= link_to 'Edit', edit_hotel_path(@hotel) %> |
 <%= link_to 'Back', hotels_path %>

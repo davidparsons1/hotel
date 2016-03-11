@@ -2,29 +2,22 @@
 
 <h1>Listing Hotels</h1>
 
+ 
 <table border="1">
-  <thead>
-    <tr>
-      <th>Hotel name</th>
-      <th>Location</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @hotels.each do |hotel| %>
-      <tr>
-        <td><%= hotel.hotel_name %></td>
-        <td><%= hotel.location %></td>
-        <td><%= link_to 'Show', hotel %>
-        <%= link_to 'Edit', edit_hotel_path(hotel) %>
-        <%= link_to 'Destroy', hotel, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-		
-      </tr>
-    <% end %>
-  </tbody>
+<% @hotels.each do |hotel| %>
+      <thead>
+	  <tr>
+	  <th> <%= image_tag(hotel.image, :size=>"250x250") %><br>  <th> 
+        <th>  <b>Hotel name | </b><%= hotel.hotel_name %><br>
+        <b>Location | </b><%= hotel.location %><br>
+        <%= link_to '|View Rooms|', hotel %>
+        <%= link_to '|Destroy|', hotel, method: :delete, data: { confirm: 'Are you sure?' } %>   </th>
+	
+	</tr>
+	</thead>
+ <% end %>
 </table>
 
-<br>
+
 
 <%= link_to 'New Hotel', new_hotel_path %>

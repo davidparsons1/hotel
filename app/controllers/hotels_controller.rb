@@ -1,11 +1,18 @@
 class HotelsController < ApplicationController
   before_action :set_hotel, only: [:show, :edit, :update, :destroy]
-
+  
   # GET /hotels
   # GET /hotels.json
   def index
     @hotels = Hotel.all
+	if params[:search]
+    @hotels = Hotel.search(params[:search]).order("created_at DESC")
+  else
+    @hotels = Hotel.all.order('created_at DESC')
   end
+end
+	
+  
 
   # GET /hotels/1
   # GET /hotels/1.json
@@ -21,8 +28,8 @@ class HotelsController < ApplicationController
   def edit
   end
 
-  # POST /hotels
-  # POST /hotels.json
+  # hotel /hotels
+  # hotel /hotels.json
   def create
     @hotel = Hotel.new(hotel_params)
 
@@ -61,24 +68,31 @@ class HotelsController < ApplicationController
     end
   end
 
-  private
+ 
     # Use callbacks to share common setup or constraints between actions.
     def set_hotel
       @hotel = Hotel.find(params[:id])
     end
 	
+	# POST /hotels
+    # POST /hotels.json
 	 def create
-    @hotel = Hotel.new(user_params)
+    @hotel = Hotel.new(hotel_params)
+	
+	  respond_to do |format|
     if @hotel.save
-      flash[:success] = "The Hotel has been added!"
-      redirect_to @user
-    else
-      render 'new'
+        format.html { redirect_to @hotel, notice: 'Hotel was successfully created.' }
+        format.json { render :show, status: :created, location: @hotel }
+      else
+        format.html { render :new }
+        format.json { render json: @room.errors, status: :unprocessable_entity }
+      end
     end
-  end
+	end
+  
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def hotel_params
-      params.require(:hotel).permit(:hotel_name, :location)
+      params.require(:hotel).permit(:hotel_name, :location, :latitude, :longitude)
     end
 end

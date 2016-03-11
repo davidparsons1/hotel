@@ -1,6 +1,6 @@
 class ReservationsController < ApplicationController
   before_action :set_reservation, only: [:show, :edit, :update, :destroy]
-
+  before_action :authorise
   # GET /reservations
   # GET /reservations.json
   def index
@@ -13,8 +13,11 @@ class ReservationsController < ApplicationController
   end
 
   # GET /reservations/new
+  # GET /reservations/new
   def new
-    @reservation = Reservation.new
+        @reservation = Reservation.new
+	@room = Room.find_by_id(params[:room_id])
+	session[:room_id] = @room.id
   end
 
   # GET /reservations/1/edit
@@ -24,8 +27,10 @@ class ReservationsController < ApplicationController
   # POST /reservations
   # POST /reservations.json
   def create
-    @reservation = Reservation.new(reservation_params)
-
+	
+        @reservation = Reservation.new(reservation_params)
+	@reservation.room_id = session[:room_id]
+	@reservation.guest_id = @current_guest.id
     respond_to do |format|
       if @reservation.save
         format.html { redirect_to @reservation, notice: 'Reservation was successfully created.' }

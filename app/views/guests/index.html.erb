@@ -10,10 +10,10 @@
       <th>E-mail</th>
       <th>Contact Number</th>
       <th>Address</th>
-      <th>Password</th>
       <th colspan="7"></th>
     </tr>
   </thead>
+  
 
   <tbody>
     <% @guests.each do |guest| %>
@@ -23,7 +23,6 @@
         <td><%= guest.guest_email %></td>
         <td><%= guest.guest_phone %></td>
         <td><%= guest.guest_address %></td>
-        <td><%= guest.password_digest %></td>
         <td><%= link_to 'Show', guest %>
         <%= link_to 'Edit', edit_guest_path(guest) %>
         <%= link_to 'Destroy', guest, method: :delete, data: { confirm: 'Are you sure?' } %>

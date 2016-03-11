@@ -25,10 +25,24 @@
   <%= @guest.guest_address %>
 </p>
 
-<p>
-  <strong>Password :</strong>
-  <%= @guest.password_digest %>
-</p>
+
+
+
+<h4>These are your reservations:</h4>
+<% @guest.reservations.each do |r| %>
+<table border="1">
+  <thead>
+    <tr>
+	<th><%= image_tag(r.room.room_type.image, :size=>"250x250") %></th></br>
+	<th><strong>Hotel Name: </strong><%= r.room.hotel.hotel_name %></br>
+	<strong>Hotel Location: </strong><%= r.room.hotel.location %></br>
+	<strong>Check In: </strong><%= r.check_in %></br>
+	<strong>Check Out: </strong><%= r.check_out %></br>
+	<%= link_to 'Alter Reservation', edit_reservation_path(r) %>
+	</tr>
+	</thead>
+	</table>
+<% end %>
 
 <%= link_to 'Edit', edit_guest_path(@guest) %> |
 <%= link_to 'Back', guests_path %>
